@@ -7,6 +7,7 @@ import io.quarkus.mongodb.panache.kotlin.PanacheMongoRepository
 import io.quarkus.runtime.StartupEvent
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.enterprise.event.Observes
+import org.bson.types.ObjectId
 
 @ApplicationScoped
 class BeerRepository: PanacheMongoRepository<Beer> {
@@ -40,11 +41,12 @@ class BeerRepository: PanacheMongoRepository<Beer> {
         val faker = Faker()
         val fakerBeer = faker.beer()
         val beer = Beer()
+        beer.id = ObjectId.get() //some faked-out objectId
         beer.name = fakerBeer.name()
         beer.hop = fakerBeer.hop()
         beer.malt = fakerBeer.malt()
-        beer.style = fakerBeer.name()
-        beer.yeast = fakerBeer.name()
+        beer.style = fakerBeer.style()
+        beer.yeast = fakerBeer.yeast()
         return beer
     }
 
