@@ -1,34 +1,35 @@
 package edu.uchicago.gerber.quark.services
 
+import edu.uchicago.gerber.quark.models.Beer
 import edu.uchicago.gerber.quark.models.Movie
-import edu.uchicago.gerber.quark.repositories.MovieMongodbRepo
+import edu.uchicago.gerber.quark.repositories.BeerRepository
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.inject.Inject
 
 @ApplicationScoped
 //class MovieService (private val movieRepo: MovieMongodbRepo) {
-    class MovieService  {
+    class BeerService  {
 
     @Inject
-    lateinit var movieRepo: MovieMongodbRepo
+    lateinit var beerRepository: BeerRepository
 
 
-    fun listAll(): List<Movie>{
+    fun listAll(): List<Beer>{
         //just satisfy compiler
-        return movieRepo.listAll()
+        return beerRepository.listAll()
     }
 
-    fun add( movie: Movie?): List<Movie>{
+    fun add( movie: Beer?): List<Beer>{
         return listAll()
     }
 
-    fun get(id:String): Movie? {
+    fun get(id:String): Beer? {
         //just satisfy compiler
         return null
     }
-    fun paged(page: Int): List<Movie>{
+    fun paged(page: Int): List<Beer>{
       //  return movieRepo.paged(page)
-        return emptyList<Movie>()
+        return emptyList<Beer>()
     }
 
 }

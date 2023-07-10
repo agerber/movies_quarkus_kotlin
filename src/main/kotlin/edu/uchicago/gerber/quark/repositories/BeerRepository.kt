@@ -1,27 +1,26 @@
 package edu.uchicago.gerber.quark.repositories
 
 import com.github.javafaker.Faker
-import com.mongodb.BasicDBObject
-import com.mongodb.client.FindIterable
-import com.mongodb.client.MongoClient
-import com.mongodb.client.MongoCollection
-import com.mongodb.client.MongoCursor
+import edu.uchicago.gerber.quark.models.Beer
 import edu.uchicago.gerber.quark.models.Movie
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoRepository
 import io.quarkus.runtime.StartupEvent
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.enterprise.event.Observes
-import jakarta.inject.Inject
-import org.bson.Document
-import org.bson.types.ObjectId
-import java.util.stream.Collectors
-import java.util.stream.Stream
 
 @ApplicationScoped
-class MovieMongodbRepo: PanacheMongoRepository<Movie> {
+class BeerRepository: PanacheMongoRepository<Beer> {
 
     //use this guide to create various CRUD ops
     //https://quarkus.io/guides/mongodb-panache-kotlin
+
+    //todo remove unnessary dependencies
+    //fix maven home and surefire.
+    //add tests.
+    //todo convert to Beer database.
+
+
+
 
 //
 //    @Inject
@@ -31,20 +30,25 @@ class MovieMongodbRepo: PanacheMongoRepository<Movie> {
 
     //this will get fired when the quarkus microservice starts
     fun onStart(@Observes ev: StartupEvent?) {
-        val faker = Faker()
-        var movie: Movie
-        val list = mutableListOf<Movie>()
-        repeat(1000){
-            movie = Movie()
-            movie.title = faker.beer().name()
-            movie.year = faker.chuckNorris().fact().hashCode().toString()
-            list.add(movie)
-        }
+        val list = mutableListOf<Beer>()
+        repeat(1000){ list.add(generateBeerFromFaker()) }
         persist(list)
 
     }
 
-    fun add(movie: Movie): List<Movie> {
+    private fun generateBeerFromFaker(): Beer{
+        val faker = Faker()
+        val fakerBeer = faker.beer()
+        val beer = Beer()
+        beer.name = fakerBeer.name()
+        beer.hop = fakerBeer.hop()
+        beer.malt = fakerBeer.malt()
+        beer.style = fakerBeer.name()
+        beer.yeast = fakerBeer.name()
+        return beer
+    }
+
+    fun add(movie: Beer): List<Beer> {
         persist(movie)
         return listAll()
     }
