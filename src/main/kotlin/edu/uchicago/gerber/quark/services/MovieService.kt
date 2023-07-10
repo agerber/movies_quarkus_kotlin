@@ -19,9 +19,9 @@ import jakarta.enterprise.context.ApplicationScoped
         //just satisfy compiler
         return null
     }
-    fun paged(page: Int): List<Movie>?{
+    fun paged(page: Int): List<Movie>{
       //  return movieRepo.paged(page)
-        return null
+        return emptyList<Movie>()
     }
 
 }
