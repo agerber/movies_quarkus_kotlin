@@ -7,6 +7,7 @@ import software.amazon.awssdk.services.dynamodb.model.PutItemRequest
 import software.amazon.awssdk.services.dynamodb.model.ScanRequest
 
 abstract class AbstractDynamodbRepo {
+    //abstract val dynamoDB: Any
     val tableName: String
         get() = "Movies"
 
