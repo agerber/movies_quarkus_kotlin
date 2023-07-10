@@ -7,26 +7,10 @@ import io.quarkus.runtime.StartupEvent
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.enterprise.event.Observes
 import org.bson.types.ObjectId
+import java.util.stream.Stream
 
 @ApplicationScoped
 class BeerRepository: PanacheMongoRepository<Beer> {
-
-    //use this guide to create various CRUD ops
-    //https://quarkus.io/guides/mongodb-panache-kotlin
-
-    //todo remove unnessary dependencies
-    //fix maven home and surefire.
-    //add tests.
-    //todo convert to Beer database.
-
-
-
-
-//
-//    @Inject
-//    lateinit var mongoClient: MongoClient
-
-    val PAGE_SIZE = 20
 
     //this will get fired when the quarkus microservice starts
     fun onStart(@Observes ev: StartupEvent?) {
@@ -36,26 +20,69 @@ class BeerRepository: PanacheMongoRepository<Beer> {
 
     }
 
-    private fun generateBeerFromFaker(): Beer{
-        val faker = Faker()
-        val fakerBeer = faker.beer()
-        val beer = Beer()
-        beer.id = ObjectId.get() //some faked-out objectId
-        beer.name = fakerBeer.name()
-        beer.hop = fakerBeer.hop()
-        beer.malt = fakerBeer.malt()
-        beer.style = fakerBeer.style()
-        beer.yeast = fakerBeer.yeast()
-        return beer
+    //use this guide to create various CRUD ops
+    //https://quarkus.io/guides/mongodb-panache-kotlin
+
+    //todo remove unnessary dependencies
+    //fix maven home and surefire.
+    //add tests.
+    //todo convert to Beer database.
+
+    //CREATE
+    //create(Beer)
+    fun create(beer: Beer){
+        this.persist(beer)
+    }
+    //create(List<Beer>)
+    fun create(beers: List<Beer>){
+        this.persist(beers)
+    }
+    //READ
+    //read(id)
+    fun findById_(id:String): Beer {
+       val beerId = ObjectId(id)
+       return this.findById(beerId) ?: throw Exception("No person with that ID")
     }
 
-    fun add(beer: Beer): List<Beer> {
-        persist(beer)
-        return listAll()
+    //stream all
+    fun streamAll_(): Stream<Beer> {
+        return this.streamAll()
     }
 
-    //this is for testing purposes.
-    fun genTestData(): List<Beer>{
+    //UPDATE
+    //update(updateBeer)
+    fun update_(updatedBeer: Beer) {
+       this.update(updatedBeer);
+
+    }
+
+    //DELETE
+    //delete(id)
+    fun deleteById_(id:String){
+      val beerId = ObjectId(id)
+      this.deleteById(beerId)
+    }
+
+    fun deleteById_(id:ObjectId){
+        this.deleteById(id)
+    }
+
+    fun deleteAll_(){
+        this.deleteAll()
+    }
+
+    //COUNT
+    fun count_() : Long{
+        return this.count()
+    }
+
+    val PAGE_SIZE = 20
+
+
+
+
+    //this is for testing faker
+    fun gen5FakerBeers(): List<Beer>{
         val list = mutableListOf<Beer>()
         repeat(5){ list.add(generateBeerFromFaker()) }
         return list
@@ -111,4 +138,20 @@ class BeerRepository: PanacheMongoRepository<Beer> {
 //        const val MOVIE_TITLE_COL = "title"
 //        const val MOVIE_YEAR_COL = "year"
 //    }
+
+
+    private fun generateBeerFromFaker(): Beer{
+        val faker = Faker()
+        val fakerBeer = faker.beer()
+        val beer = Beer()
+        //we allow mongo to generate the id's for us
+        //beer.id = ObjectId.get()
+        beer.name = fakerBeer.name()
+        beer.hop = fakerBeer.hop()
+        beer.malt = fakerBeer.malt()
+        beer.style = fakerBeer.style()
+        beer.yeast = fakerBeer.yeast()
+        return beer
+    }
+
 }

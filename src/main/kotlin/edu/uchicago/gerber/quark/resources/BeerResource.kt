@@ -34,7 +34,7 @@ class BeerResource  (
 //    }
     @GET @Path("/test")
      fun testMe(): kotlin.collections.List<Beer> {
-           return beerService.generateTestData()
+           return beerService.gen5FakerBeers()
     }
     //https://www.technicalkeeda.com/java-mongodb-tutorials/java-mongodb-driver-3-3-0-pagination-example
 //    @GET @Path("/paged/{page}")    fun paged(@PathParam("page") page: kotlin.Int): kotlin.collections.List<Movie> {
