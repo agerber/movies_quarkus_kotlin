@@ -20,6 +20,9 @@ import java.util.stream.Stream
 @ApplicationScoped
 class MovieMongodbRepo: PanacheMongoRepository<Movie> {
 
+    //use this guide to create various CRUD ops
+    //https://quarkus.io/guides/mongodb-panache-kotlin
+
 //
 //    @Inject
 //    lateinit var mongoClient: MongoClient
