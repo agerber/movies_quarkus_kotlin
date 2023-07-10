@@ -53,6 +53,12 @@ class BeerRepository: PanacheMongoRepository<Beer> {
         return listAll()
     }
 
+    fun genTestData(): List<Beer>{
+        val list = mutableListOf<Beer>()
+        repeat(5){ list.add(generateBeerFromFaker()) }
+        return list
+    }
+
 
 
 //    operator fun get(id: String?): Movie? {

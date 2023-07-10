@@ -19,6 +19,10 @@ import jakarta.inject.Inject
         return beerRepository.listAll()
     }
 
+    fun generateTestData(): List<Beer>{
+      return  beerRepository.genTestData()
+    }
+
     fun add( movie: Beer?): List<Beer>{
         return listAll()
     }
