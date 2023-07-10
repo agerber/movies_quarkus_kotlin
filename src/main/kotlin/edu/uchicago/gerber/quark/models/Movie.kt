@@ -1,3 +1,10 @@
 package edu.uchicago.gerber.quark.models
 
-data class Movie(var id:String = "", var title:String = "", var year:Int = 0)
+import org.bson.types.ObjectId
+
+class Movie{
+    var id: ObjectId? = null // used by MongoDB for the _id field
+    lateinit var title:String
+    lateinit var year:String //this will be a string representation of the year
+}
+

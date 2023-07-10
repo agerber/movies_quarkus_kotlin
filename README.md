@@ -49,6 +49,49 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 ./mvnw package -Pnative -Dquarkus.native.container-build=true
 ```
 
+
+
+
+//to use dynamodb
+
+//run a local amazonDynamoDB container
+docker run --publish 8000:8000 amazon/dynamodb-local:1.11.477 -jar DynamoDBLocal.jar -inMemory -sharedDb
+
+This starts a DynamoDB instance that is accessible on port 8000. You can check it’s running by accessing the web shell on http://localhost:8000/shell.
+
+Have a look at the Setting Up DynamoDB Local guide for other options to run DynamoDB.
+
+Open http://localhost:8000/shell in your browser.
+
+Copy and paste the following code to the shell and run it:
+
+
+var params = {
+TableName: 'Movies',
+KeySchema: [{ AttributeName: 'id', KeyType: 'HASH' }],
+AttributeDefinitions: [{  AttributeName: 'id', AttributeType: 'S', }],
+ProvisionedThroughput: { ReadCapacityUnits: 1, WriteCapacityUnits: 1, }
+};
+
+dynamodb.createTable(params, function(err, data) {
+if (err) ppJson(err);
+else ppJson(data);
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 You can then execute your native executable with: `./target/movies-quarks-kotlin-1.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.

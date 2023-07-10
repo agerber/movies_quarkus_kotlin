@@ -16,14 +16,14 @@ class MoviesResource  (
 
 
     @GET
-    fun findAll(): List<Movie>{
-        return movieService.findAll()
+    fun listAll(): List<Movie>{
+        return movieService.listAll()
     }
 
     @POST
     fun add(movie: Movie?): List<Movie> {
         movieService.add(movie)
-        return findAll()
+        return listAll()
     }
     @GET @Path("{id}")
     fun getFromId(@PathParam("id") id: String): Movie {
@@ -36,9 +36,13 @@ class MoviesResource  (
     @GET @Path("/test")    fun testMe(): kotlin.collections.List<Movie> {
         val faker: Faker = Faker()
         val movies = mutableListOf<Movie>()
+        var movie: Movie
         repeat(5) {
             //add some bogus movie using faker
-            movies.add(Movie(faker.chuckNorris().fact(), faker.beer().name(), faker.hashCode() ))
+            movie = Movie()
+            movie.title = faker.beer().name()
+            movie.year = faker.hashCode().toString()
+            movies.add(movie)
         }
         return movies
 
