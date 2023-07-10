@@ -10,7 +10,9 @@ import jakarta.ws.rs.core.MediaType
 @Path("/movies")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-class MoviesResource  (private val  movieService:MovieService) {
+class MoviesResource  (
+    //use constructor injection instead of Dependency Injection in Java
+    private val  movieService:MovieService) {
 
 
     @GET
