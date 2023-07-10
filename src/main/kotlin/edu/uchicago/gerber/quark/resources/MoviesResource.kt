@@ -12,11 +12,8 @@ import java.util.stream.Collectors
 
 
 @Path("/movies") @Produces(MediaType.APPLICATION_JSON) @Consumes(MediaType.APPLICATION_JSON)
-class MoviesResource    constructor (){
+class MoviesResource  (private val  movieService:MovieService) {
 
-    @field:Default
-    @field:Inject
-    lateinit  var  movieService: MovieService
 
     @get:GET
     val all: kotlin.collections.List<edu.uchicago.gerber.quark.models.Movie>

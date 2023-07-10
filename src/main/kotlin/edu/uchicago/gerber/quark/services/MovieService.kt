@@ -1,7 +1,9 @@
 package edu.uchicago.gerber.quark.services
 
 import edu.uchicago.gerber.quark.models.Movie
+import jakarta.enterprise.context.ApplicationScoped
 
+@ApplicationScoped
 class MovieService {
 
     fun findAll(): List<Movie>{
