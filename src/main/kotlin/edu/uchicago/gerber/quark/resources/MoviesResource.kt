@@ -11,7 +11,9 @@ import java.util.stream.Collectors
 
 
 
-@Path("/movies") @Produces(MediaType.APPLICATION_JSON) @Consumes(MediaType.APPLICATION_JSON)
+@Path("/movies")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 class MoviesResource  (private val  movieService:MovieService) {
 
 
@@ -33,12 +35,18 @@ class MoviesResource  (private val  movieService:MovieService) {
         }
         return movie
     }
-//    @GET @Path("/test")    fun testMe(): kotlin.collections.List<Movie> {
-//        val faker: Faker = Faker()
-//        return java.util.stream.Stream.generate<Movie>(java.util.function.Supplier<Movie> ({Movie(faker.chuckNorris().fact(), faker.beer().name(), faker.hashCode())})).limit(5).collect<kotlin.collections.List<Movie>, kotlin.Any>(Collectors.toList<Movie>())
-//    }
+    @GET @Path("/test")    fun testMe(): kotlin.collections.List<Movie> {
+        val faker: Faker = Faker()
+        val movies = mutableListOf<Movie>()
+        repeat(5) {
+            //add some bogus movie using faker
+            movies.add(Movie(faker.chuckNorris().fact(), faker.beer().name(), faker.hashCode() ))
+        }
+        return movies
+
+    }
     //https://www.technicalkeeda.com/java-mongodb-tutorials/java-mongodb-driver-3-3-0-pagination-example
-//    @GET @Path("/paged/{page}")    fun paged(@PathParam("page") page: kotlin.Int): kotlin.collections.List<Movie> {
-//        return movieService.paged(page)
-//    }
+    @GET @Path("/paged/{page}")    fun paged(@PathParam("page") page: kotlin.Int): kotlin.collections.List<Movie> {
+        return movieService.paged(page)
+    }
 }
