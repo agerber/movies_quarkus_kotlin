@@ -11,7 +11,7 @@ import jakarta.ws.rs.core.MediaType
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 class MoviesResource  (
-    //use constructor injection instead of Dependency Injection in Java
+    //use constructor injection in Kotlin instead of Dependency Injection in Java
     private val  movieService:MovieService) {
 
 
