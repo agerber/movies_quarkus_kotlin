@@ -1,7 +1,7 @@
 package edu.uchicago.gerber.quark.services
 
 import edu.uchicago.gerber.quark.models.Beer
-import edu.uchicago.gerber.quark.models.Movie
+
 import edu.uchicago.gerber.quark.repositories.BeerRepository
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.inject.Inject

@@ -1,8 +1,6 @@
 package edu.uchicago.gerber.quark.resources
 
-import com.github.javafaker.Faker
 import edu.uchicago.gerber.quark.models.Beer
-import edu.uchicago.gerber.quark.models.Movie
 import edu.uchicago.gerber.quark.services.BeerService
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType
@@ -11,7 +9,7 @@ import jakarta.ws.rs.core.MediaType
 @Path("/movies")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-class MoviesResource  (
+class BeerResource  (
     //use constructor injection in Kotlin instead of Dependency Injection in Java
     private val  beerService:BeerService) {
 

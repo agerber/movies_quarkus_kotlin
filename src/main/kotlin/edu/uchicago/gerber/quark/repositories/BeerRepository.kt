@@ -2,7 +2,6 @@ package edu.uchicago.gerber.quark.repositories
 
 import com.github.javafaker.Faker
 import edu.uchicago.gerber.quark.models.Beer
-import edu.uchicago.gerber.quark.models.Movie
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoRepository
 import io.quarkus.runtime.StartupEvent
 import jakarta.enterprise.context.ApplicationScoped
@@ -50,11 +49,12 @@ class BeerRepository: PanacheMongoRepository<Beer> {
         return beer
     }
 
-    fun add(movie: Beer): List<Beer> {
-        persist(movie)
+    fun add(beer: Beer): List<Beer> {
+        persist(beer)
         return listAll()
     }
 
+    //this is for testing purposes.
     fun genTestData(): List<Beer>{
         val list = mutableListOf<Beer>()
         repeat(5){ list.add(generateBeerFromFaker()) }
