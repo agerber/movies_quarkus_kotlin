@@ -1,5 +1,25 @@
 # movies-quarks-kotlin
 
+
+
+
+//to use mongo:
+docker run -ti --rm -p 27017:27017 mongo:latest
+
+//make sure to include this line in the application.properties
+quarkus.mongodb.connection-string = mongodb://localhost:27017
+
+
+
+
+
+
+
+
+
+
+
+
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
