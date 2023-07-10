@@ -3,12 +3,8 @@ package edu.uchicago.gerber.quark.resources
 import com.github.javafaker.Faker
 import edu.uchicago.gerber.quark.models.Movie
 import edu.uchicago.gerber.quark.services.MovieService
-import jakarta.enterprise.inject.Default
-import jakarta.inject.Inject
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType
-import java.util.stream.Collectors
-
 
 
 @Path("/movies")
@@ -17,18 +13,18 @@ import java.util.stream.Collectors
 class MoviesResource  (private val  movieService:MovieService) {
 
 
-    @get:GET
-    val all: kotlin.collections.List<edu.uchicago.gerber.quark.models.Movie>
-        get() {
-            return movieService.findAll()
-        }
+    @GET
+    fun findAll(): List<Movie>{
+        return movieService.findAll()
+    }
 
     @POST
-    fun add(movie: Movie?): kotlin.collections.List<Movie> {
+    fun add(movie: Movie?): List<Movie> {
         movieService.add(movie)
-        return this.all
+        return findAll()
     }
-    @GET @Path("{id}")    fun getFromId(@PathParam("id") id: kotlin.String): Movie {
+    @GET @Path("{id}")
+    fun getFromId(@PathParam("id") id: String): Movie {
         val movie: Movie? = movieService.get(id)
         if (null == movie){
             throw NotFoundException("The Movie with id " + id + " was not found")
