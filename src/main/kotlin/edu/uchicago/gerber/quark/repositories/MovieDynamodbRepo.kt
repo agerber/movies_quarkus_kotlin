@@ -24,7 +24,7 @@ lateinit  var  dynamoDB: DynamoDbClient
         return  dynamoDB.scanPaginator(scanRequest())
             .items()
             .stream()
-            .map<Movie>(Function<Map<String, AttributeValue>, Movie> { item -> transformToMovie(item) })
+            .map { item -> transformToMovie(item) }
             .collect(Collectors.toList())
 
     }
