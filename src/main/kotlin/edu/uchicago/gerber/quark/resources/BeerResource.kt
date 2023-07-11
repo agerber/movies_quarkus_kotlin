@@ -1,17 +1,23 @@
 package edu.uchicago.gerber.quark.resources
 
 import edu.uchicago.gerber.quark.models.Beer
+import edu.uchicago.gerber.quark.repositories.BeerRepository
 import edu.uchicago.gerber.quark.services.BeerService
+import jakarta.inject.Inject
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType
 
 
-@Path("/movies")
+@Path("/beers")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-class BeerResource  (
-    //use constructor injection in Kotlin instead of Dependency Injection in Java
-    private val  beerService:BeerService) {
+class BeerResource
+    //use constructor injection in Kotlin instead of Dependency Injection in Java)
+{
+
+    @Inject
+    lateinit var beerService:BeerService
+
 
 
     @GET
