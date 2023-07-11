@@ -25,7 +25,6 @@ class BeerResource {
 
     //equivalent to CREATE
     @POST
-    @Transactional
     fun create(beer: Beer): List<Beer> {
         beerService.create(beer)
         return readAll()
@@ -72,7 +71,6 @@ class BeerResource {
     //equivalent to UPDATE
 
     @PUT
-    @Transactional
     fun update(beer: Beer): List<Beer> {
         beerService.update(beer)
         return readAll()
@@ -83,14 +81,12 @@ class BeerResource {
 
     @DELETE
     @Path("/{id}")
-    @Transactional
     fun deleteById(@PathParam("id")id: String): List<Beer> {
         beerService.deleteById(id)
         return readAll()
     }
 
     @DELETE
-    @Transactional
     fun deleteAll(){
         beerService.deleteAll()
     }
