@@ -70,9 +70,6 @@ class MongoBeerRepository: PanacheMongoRepository<Beer>, BeerRepoInterface {
       this.deleteById(beerId)
     }
 
-    override fun _deleteById(id:ObjectId){
-        this.deleteById(id)
-    }
 
     override fun _deleteAll(){
         this.deleteAll()

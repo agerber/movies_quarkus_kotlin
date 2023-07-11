@@ -8,6 +8,7 @@ import jakarta.inject.Inject
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType
 import jakarta.transaction.Transactional
+import jakarta.ws.rs.core.Response
 
 
 @Path("/beers")
@@ -23,13 +24,13 @@ class BeerResource {
     val TOTAL_PER_PAGE = 10
 
     //equivalent to CREATE
-    @POST
-    @Path("/{beer}")
-    @Transactional
-    fun create(@PathParam("beer")beer: Beer): List<Beer> {
-        beerService.create(beer)
-        return readAll()
-    }
+//    @POST
+//    @Path("/{beer}")
+//    @Transactional
+//    fun create(@PathParam("beer")beer: Beer): List<Beer> {
+//        beerService.create(beer)
+//        return readAll()
+//    }
 
 
     //equivalent to READ
@@ -43,16 +44,15 @@ class BeerResource {
     @Path("{id}")
     fun readById(@PathParam("id") id: String): Beer {
 
-        //todo need to return a 404
+       return beerService.readById(id)
 
-        return beerService.readById(id)
-//        var beer: Beer
+      //  return beerService.readById(id)
+//        val beer: Beer
 //        try {
 //            beer = beerService.readById(id)
 //            return  beer
 //        } catch (e:Exception){
-//           return JSONObject(e.message)
-//          //  return "{${e.message}}"
+//            throw  WebApplicationException(Response.status(422).entity(e.message).build())
 //        }
 
     }
@@ -72,13 +72,13 @@ class BeerResource {
 
     //equivalent to UPDATE
 
-    @PUT
-    @Path("/{beer}")
-    @Transactional
-    fun update(@PathParam("beer")beer: Beer): List<Beer> {
-        beerService.update(beer)
-        return readAll()
-    }
+//    @PUT
+//    @Path("/{beer}")
+//    @Transactional
+//    fun update(@PathParam("beer")beer: Beer): List<Beer> {
+//        beerService.update(beer)
+//        return readAll()
+//    }
 
 
     //equivalent to DELETE
