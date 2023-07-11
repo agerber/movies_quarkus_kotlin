@@ -140,3 +140,15 @@ Easily start your RESTful Web Services
 Easily start your Reactive RESTful Web Services
 
 [Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+
+
+
+localhost:8080/beers/
+POST
+{"name":"TestName", "hop":"TestHop", "malt":"TestMalt", "style":"TestStyle",
+"yeast":"TestYeast"}
+
+localhost:8080/beers/
+PUT
+{"id":"64ad9d0136a6f71d17d36453", "name":"TestName", "hop":"TestHop", "malt":"TestMalt", "style":"TestStyle",
+"yeast":"TestYeast"}
