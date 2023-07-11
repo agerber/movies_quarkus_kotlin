@@ -10,7 +10,7 @@ import jakarta.enterprise.event.Observes
 import org.bson.types.ObjectId
 
 @ApplicationScoped
-class BeerRepository: PanacheMongoRepository<Beer> {
+class MongoBeerRepository: PanacheMongoRepository<Beer>, BeerRepoInterface {
 
     //this will get fired when the quarkus microservice starts
     fun onStart(@Observes ev: StartupEvent?) {
@@ -33,22 +33,22 @@ class BeerRepository: PanacheMongoRepository<Beer> {
 
     //CREATE
 
-    fun _create(beer: Beer){
+    override fun _create(beer: Beer){
         this.persist(beer)
     }
     //create(List<Beer>)
 
-    fun _create(beers: List<Beer>){
+    override fun _create(beers: List<Beer>){
         this.persist(beers)
     }
     //READ
-    fun _readById(id:String): Beer {
+    override fun _readById(id:String): Beer {
        val beerId = ObjectId(id)
        return this.findById(beerId) ?: throw Exception("No person with that ID")
     }
 
     //stream all
-    fun _readAll(): List<Beer> {
+    override fun _readAll(): List<Beer> {
         return  this.listAll()
         //we can also stream using this.streamAll()
     }
@@ -56,7 +56,7 @@ class BeerRepository: PanacheMongoRepository<Beer> {
     //UPDATE
     //update(updateBeer)
 
-    fun _update(updatedBeer: Beer) {
+    override fun _update(updatedBeer: Beer) {
        this.update(updatedBeer);
 
     }
@@ -64,22 +64,22 @@ class BeerRepository: PanacheMongoRepository<Beer> {
     //DELETE
     //delete(id)
 
-    fun _deleteById(id:String){
+    override fun _deleteById(id:String){
       val beerId = ObjectId(id)
       this.deleteById(beerId)
     }
 
-    fun _deleteById(id:ObjectId){
+    override fun _deleteById(id:ObjectId){
         this.deleteById(id)
     }
 
-    fun _deleteAll(){
+    override fun _deleteAll(){
         this.deleteAll()
     }
 
 
     //COUNT
-    fun _count() : Long{
+    override fun _count() : Long{
         return this.count()
     }
 

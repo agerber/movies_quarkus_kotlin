@@ -2,7 +2,7 @@ package edu.uchicago.gerber.quark.services
 
 import edu.uchicago.gerber.quark.models.Beer
 
-import edu.uchicago.gerber.quark.repositories.BeerRepository
+import edu.uchicago.gerber.quark.repositories.MongoBeerRepository
 import io.quarkus.mongodb.panache.kotlin.PanacheQuery
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.inject.Inject
@@ -12,7 +12,7 @@ import jakarta.inject.Inject
     class BeerService  {
 
     @Inject
-    lateinit var beerRepository: BeerRepository
+    lateinit var beerRepository: MongoBeerRepository
 
 
     fun listAll(): List<Beer>{
