@@ -15,9 +15,12 @@ class MongoBeerRepository: PanacheMongoRepository<Beer>, BeerRepoInterface {
 
     //this will get fired when the quarkus microservice starts
     fun onStart(@Observes ev: StartupEvent?) {
-        val list = mutableListOf<Beer>()
-        repeat(1000){ list.add(Faked.genRawEntity()) }
-        persist(list)
+        if (count() == 0L){
+            val list = mutableListOf<Beer>()
+            repeat(20){ list.add(Faked.genRawEntity()) }
+            persist(list)
+        }
+
 
     }
 
