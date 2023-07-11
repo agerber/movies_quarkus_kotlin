@@ -1,0 +1,69 @@
+package edu.uchicago.gerber.quark.repositories
+
+import edu.uchicago.gerber.quark.models.Beer
+import edu.uchicago.gerber.quark.models.Faked
+import io.quarkus.mongodb.panache.kotlin.PanacheQuery
+import jakarta.enterprise.context.ApplicationScoped
+
+import org.bson.types.ObjectId
+
+@ApplicationScoped
+class SomeBeerRepository: BeerRepoInterface {
+
+
+    //CREATE
+
+    override fun _create(beer: Beer){
+        //do nothing
+    }
+
+    override fun _create(beers: List<Beer>){
+        //do nothing
+    }
+    //READ
+    override fun _readById(id:String): Beer {
+      return Faked.generateBeerNoId()
+    }
+
+    //stream all
+    override fun _readAll(): List<Beer> {
+        return  Faked.gen5FakerBeers()
+    }
+
+    //UPDATE
+    //update(updateBeer)
+
+    override fun _update(updatedBeer: Beer) {
+      //do nothing
+
+    }
+
+    //DELETE
+    //delete(id)
+
+    override fun _deleteById(id:String){
+        //do nothing
+    }
+
+    override fun _deleteById(id:ObjectId){
+        //do nothing
+    }
+
+    override fun _deleteAll(){
+        //do nothing
+    }
+
+
+    //COUNT
+    override fun _count() : Long{
+        return 100L
+    }
+
+    override fun _findAll(): PanacheQuery<Beer>? {
+        return null
+    }
+
+
+
+
+}

@@ -1,8 +1,11 @@
 package edu.uchicago.gerber.quark.services
 
 import edu.uchicago.gerber.quark.models.Beer
+import edu.uchicago.gerber.quark.models.Faked
+import edu.uchicago.gerber.quark.repositories.BeerRepoInterface
 
 import edu.uchicago.gerber.quark.repositories.MongoBeerRepository
+import edu.uchicago.gerber.quark.repositories.SomeBeerRepository
 import io.quarkus.mongodb.panache.kotlin.PanacheQuery
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.inject.Inject
@@ -12,24 +15,27 @@ import jakarta.inject.Inject
     class BeerService  {
 
     @Inject
-    lateinit var beerRepository: MongoBeerRepository
+    lateinit var beerRepository: SomeBeerRepository
 
 
     fun listAll(): List<Beer>{
         //just satisfy compiler
-        return beerRepository.listAll()
+        return beerRepository._readAll()
     }
 
     fun gen5FakerBeers(): List<Beer>{
-      return  beerRepository.gen5FakerBeers()
+      return  Faked.gen5FakerBeers()
     }
 
     fun add( movie: Beer?): List<Beer>{
         return listAll()
     }
 
-    fun findAll(): PanacheQuery<Beer>{
-      return  beerRepository.findAll()
+    fun findAll(): PanacheQuery<Beer>?{
+
+      return beerRepository._findAll()
+
+
     }
 
     fun get(id:String): Beer? {

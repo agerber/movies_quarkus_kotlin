@@ -1,6 +1,7 @@
 package edu.uchicago.gerber.quark.repositories
 
 import edu.uchicago.gerber.quark.models.Beer
+import io.quarkus.mongodb.panache.kotlin.PanacheQuery
 import org.bson.types.ObjectId
 
 interface BeerRepoInterface {
@@ -14,5 +15,6 @@ interface BeerRepoInterface {
     fun _deleteById(id: ObjectId)
     fun _deleteAll()
     fun _count() : Long
+    fun _findAll(): PanacheQuery<Beer>?
 
 }
