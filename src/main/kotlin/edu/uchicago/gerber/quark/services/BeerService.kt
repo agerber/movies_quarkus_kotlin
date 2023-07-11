@@ -3,6 +3,7 @@ package edu.uchicago.gerber.quark.services
 import edu.uchicago.gerber.quark.models.Beer
 
 import edu.uchicago.gerber.quark.repositories.BeerRepository
+import io.quarkus.mongodb.panache.kotlin.PanacheQuery
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.inject.Inject
 
@@ -25,6 +26,10 @@ import jakarta.inject.Inject
 
     fun add( movie: Beer?): List<Beer>{
         return listAll()
+    }
+
+    fun findAll(): PanacheQuery<Beer>{
+      return  beerRepository.findAll()
     }
 
     fun get(id:String): Beer? {

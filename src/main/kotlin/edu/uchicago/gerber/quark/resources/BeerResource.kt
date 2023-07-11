@@ -1,8 +1,9 @@
 package edu.uchicago.gerber.quark.resources
 
+import com.fasterxml.jackson.databind.BeanDescription
 import edu.uchicago.gerber.quark.models.Beer
-import edu.uchicago.gerber.quark.repositories.BeerRepository
 import edu.uchicago.gerber.quark.services.BeerService
+import io.quarkus.mongodb.panache.kotlin.PanacheQuery
 import jakarta.inject.Inject
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType
@@ -15,14 +16,23 @@ class BeerResource
     //use constructor injection in Kotlin instead of Dependency Injection in Java)
 {
 
+    //add this import jakarta.transaction.Transactional to any thing that modifies the db
+
     @Inject
     lateinit var beerService:BeerService
 
-
+    val TOTAL_PER_PAGE = 10
 
     @GET
     fun listAll(): List<Beer>{
         return beerService.listAll()
+    }
+    @GET
+    @Path("/{page}")
+    fun _paged(@PathParam("page") page: Int): List<Beer> {
+        //this is lazy.
+        val pagedBeers: PanacheQuery<Beer> = beerService.findAll()
+        return pagedBeers.page(page, TOTAL_PER_PAGE).list()
     }
 
 //    @POST

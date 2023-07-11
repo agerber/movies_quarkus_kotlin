@@ -6,8 +6,8 @@ import io.quarkus.mongodb.panache.kotlin.PanacheMongoRepository
 import io.quarkus.runtime.StartupEvent
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.enterprise.event.Observes
+
 import org.bson.types.ObjectId
-import java.util.stream.Stream
 
 @ApplicationScoped
 class BeerRepository: PanacheMongoRepository<Beer> {
@@ -15,7 +15,7 @@ class BeerRepository: PanacheMongoRepository<Beer> {
     //this will get fired when the quarkus microservice starts
     fun onStart(@Observes ev: StartupEvent?) {
         val list = mutableListOf<Beer>()
-        repeat(1000){ list.add(generateBeerFromFaker()) }
+        repeat(1000){ list.add(generateBeerNoId()) }
         persist(list)
 
     }
@@ -23,56 +23,63 @@ class BeerRepository: PanacheMongoRepository<Beer> {
     //use this guide to create various CRUD ops
     //https://quarkus.io/guides/mongodb-panache-kotlin
 
+    //guide to paging
+    //https://quarkus.io/guides/hibernate-orm-panache#paging
+
     //todo remove unnessary dependencies
     //fix maven home and surefire.
     //add tests.
-    //todo convert to Beer database.
+
 
     //CREATE
-    //create(Beer)
-    fun create(beer: Beer){
+
+    fun _create(beer: Beer){
         this.persist(beer)
     }
     //create(List<Beer>)
-    fun create(beers: List<Beer>){
+
+    fun _create(beers: List<Beer>){
         this.persist(beers)
     }
     //READ
-    //read(id)
-    fun findById_(id:String): Beer {
+    fun _readById(id:String): Beer {
        val beerId = ObjectId(id)
        return this.findById(beerId) ?: throw Exception("No person with that ID")
     }
 
     //stream all
-    fun streamAll_(): Stream<Beer> {
-        return this.streamAll()
+    fun _readAll(): List<Beer> {
+        return  this.listAll()
+        //we can also stream using this.streamAll()
     }
 
     //UPDATE
     //update(updateBeer)
-    fun update_(updatedBeer: Beer) {
+
+    fun _update(updatedBeer: Beer) {
        this.update(updatedBeer);
 
     }
 
     //DELETE
     //delete(id)
-    fun deleteById_(id:String){
+
+    fun _deleteById(id:String){
       val beerId = ObjectId(id)
       this.deleteById(beerId)
     }
 
-    fun deleteById_(id:ObjectId){
+    fun _deleteById(id:ObjectId){
         this.deleteById(id)
     }
 
-    fun deleteAll_(){
+    fun _deleteAll(){
         this.deleteAll()
     }
 
+
     //COUNT
-    fun count_() : Long{
+    fun _count() : Long{
         return this.count()
     }
 
@@ -84,7 +91,7 @@ class BeerRepository: PanacheMongoRepository<Beer> {
     //this is for testing faker
     fun gen5FakerBeers(): List<Beer>{
         val list = mutableListOf<Beer>()
-        repeat(5){ list.add(generateBeerFromFaker()) }
+        repeat(5){ list.add(generateBeerNoId()) }
         return list
     }
 
@@ -140,7 +147,7 @@ class BeerRepository: PanacheMongoRepository<Beer> {
 //    }
 
 
-    private fun generateBeerFromFaker(): Beer{
+    private fun generateBeerNoId(): Beer{
         val faker = Faker()
         val fakerBeer = faker.beer()
         val beer = Beer()
