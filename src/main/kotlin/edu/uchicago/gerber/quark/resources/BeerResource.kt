@@ -24,13 +24,12 @@ class BeerResource {
     val TOTAL_PER_PAGE = 10
 
     //equivalent to CREATE
-//    @POST
-//    @Path("/{beer}")
-//    @Transactional
-//    fun create(@PathParam("beer")beer: Beer): List<Beer> {
-//        beerService.create(beer)
-//        return readAll()
-//    }
+    @POST
+    @Transactional
+    fun create(beer: Beer): List<Beer> {
+        beerService.create(beer)
+        return readAll()
+    }
 
 
     //equivalent to READ
@@ -72,13 +71,12 @@ class BeerResource {
 
     //equivalent to UPDATE
 
-//    @PUT
-//    @Path("/{beer}")
-//    @Transactional
-//    fun update(@PathParam("beer")beer: Beer): List<Beer> {
-//        beerService.update(beer)
-//        return readAll()
-//    }
+    @PUT
+    @Transactional
+    fun update(beer: Beer): List<Beer> {
+        beerService.update(beer)
+        return readAll()
+    }
 
 
     //equivalent to DELETE
