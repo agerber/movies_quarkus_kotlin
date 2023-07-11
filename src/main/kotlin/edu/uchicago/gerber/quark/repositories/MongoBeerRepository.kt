@@ -1,6 +1,5 @@
 package edu.uchicago.gerber.quark.repositories
 
-import com.github.javafaker.Faker
 import edu.uchicago.gerber.quark.models.Beer
 import edu.uchicago.gerber.quark.models.Faked
 import io.quarkus.mongodb.panache.kotlin.PanacheMongoRepository
@@ -17,7 +16,7 @@ class MongoBeerRepository: PanacheMongoRepository<Beer>, BeerRepoInterface {
     //this will get fired when the quarkus microservice starts
     fun onStart(@Observes ev: StartupEvent?) {
         val list = mutableListOf<Beer>()
-        repeat(1000){ list.add(Faked.generateBeerNoId()) }
+        repeat(1000){ list.add(Faked.genRawEntity()) }
         persist(list)
 
     }

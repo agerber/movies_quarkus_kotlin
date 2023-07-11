@@ -22,12 +22,12 @@ class SomeBeerRepository: BeerRepoInterface {
     }
     //READ
     override fun _readById(id:String): Beer {
-      return Faked.generateBeerNoId()
+      return Faked.genRawEntity()
     }
 
     //stream all
     override fun _readAll(): List<Beer> {
-        return  Faked.gen5FakerBeers()
+        return  Faked.genFakerBeers(50)
     }
 
     //UPDATE

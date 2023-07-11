@@ -1,6 +1,5 @@
 package edu.uchicago.gerber.quark.resources
 
-import com.fasterxml.jackson.databind.BeanDescription
 import edu.uchicago.gerber.quark.models.Beer
 import edu.uchicago.gerber.quark.models.Faked
 import edu.uchicago.gerber.quark.services.BeerService
@@ -36,7 +35,7 @@ class BeerResource
         if (pagedBeers != null){
             return pagedBeers.page(page, TOTAL_PER_PAGE).list()
         } else {
-            return Faked.gen5FakerBeers()
+            return Faked.genFakerBeers(page)
         }
 
     }

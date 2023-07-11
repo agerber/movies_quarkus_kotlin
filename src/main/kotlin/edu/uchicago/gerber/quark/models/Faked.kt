@@ -5,7 +5,7 @@ import com.github.javafaker.Faker
 object Faked {
 
     //automatically static public
-     fun generateBeerNoId(): Beer{
+     fun genRawEntity(): Beer{
         val faker = Faker()
         val fakerBeer = faker.beer()
         val beer = Beer()
@@ -19,9 +19,9 @@ object Faked {
         return beer
     }
 
-    fun gen5FakerBeers(): List<Beer>{
+    fun genFakerBeers(num: Int): List<Beer>{
         val list = mutableListOf<Beer>()
-        repeat(5){ list.add(generateBeerNoId()) }
+        repeat(num){ list.add(genRawEntity()) }
         return list
     }
 }
