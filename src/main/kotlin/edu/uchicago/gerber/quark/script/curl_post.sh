@@ -4,3 +4,4 @@ curl -X POST localhost:8080/beers/ \
    "yeast":"TestYeast"}'
 
 
+#for postman version: copy into postman || import || raw-text
