@@ -21,8 +21,8 @@ import jakarta.inject.Inject
         return beerRepository._readAll()
     }
 
-    fun gen5FakerBeers(): List<Beer>{
-      return  Faked.genFakerBeers()
+    fun genFakerBeers(num: Int): List<Beer>{
+      return  Faked.genFakerBeers(num)
     }
 
     fun add( movie: Beer?): List<Beer>{

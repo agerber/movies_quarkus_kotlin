@@ -12,9 +12,7 @@ import jakarta.ws.rs.core.MediaType
 @Path("/beers")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-class BeerResource
-    //use constructor injection in Kotlin instead of Dependency Injection in Java)
-{
+class BeerResource {
 
     //add this import jakarta.transaction.Transactional to any thing that modifies the db
 
@@ -40,6 +38,10 @@ class BeerResource
 
     }
 
+
+
+
+
 //    @POST
 //    fun add(beer: Beer?): List<Beer> {
 //        beerService.add(beer)
@@ -54,8 +56,8 @@ class BeerResource
 //        return movie
 //    }
     @GET @Path("/test")
-     fun testMe(): kotlin.collections.List<Beer> {
-           return beerService.gen5FakerBeers()
+     fun testMe(): List<Beer> {
+           return beerService.genFakerBeers(5)
     }
     //https://www.technicalkeeda.com/java-mongodb-tutorials/java-mongodb-driver-3-3-0-pagination-example
 //    @GET @Path("/paged/{page}")    fun paged(@PathParam("page") page: kotlin.Int): kotlin.collections.List<Movie> {
