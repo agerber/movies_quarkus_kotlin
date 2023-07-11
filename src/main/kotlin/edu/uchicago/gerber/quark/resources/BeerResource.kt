@@ -7,6 +7,7 @@ import io.quarkus.mongodb.panache.kotlin.PanacheQuery
 import jakarta.inject.Inject
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType
+import jakarta.transaction.Transactional
 
 
 @Path("/beers")
@@ -21,13 +22,44 @@ class BeerResource {
 
     val TOTAL_PER_PAGE = 10
 
+    //equivalent to CREATE
+    @POST
+    @Path("/{beer}")
+    @Transactional
+    fun create(@PathParam("beer")beer: Beer): List<Beer> {
+        beerService.create(beer)
+        return readAll()
+    }
+
+
+    //equivalent to READ
+
     @GET
-    fun listAll(): List<Beer>{
+    fun readAll(): List<Beer>{
         return beerService.readAll()
     }
+
     @GET
-    @Path("/{page}")
-    fun _paged(@PathParam("page") page: Int): List<Beer> {
+    @Path("{id}")
+    fun readById(@PathParam("id") id: String): Beer {
+
+        //todo need to return a 404
+
+        return beerService.readById(id)
+//        var beer: Beer
+//        try {
+//            beer = beerService.readById(id)
+//            return  beer
+//        } catch (e:Exception){
+//           return JSONObject(e.message)
+//          //  return "{${e.message}}"
+//        }
+
+    }
+
+    @GET
+    @Path("/paged/{page}")
+    fun paged(@PathParam("page") page: Int): List<Beer> {
         //this is lazy.
         val pagedBeers: PanacheQuery<Beer>? = beerService.findAll()
         if (pagedBeers != null){
@@ -38,29 +70,38 @@ class BeerResource {
 
     }
 
+    //equivalent to UPDATE
+
+    @PUT
+    @Path("/{beer}")
+    @Transactional
+    fun update(@PathParam("beer")beer: Beer): List<Beer> {
+        beerService.update(beer)
+        return readAll()
+    }
 
 
+    //equivalent to DELETE
 
+    @DELETE
+    @Path("/{id}")
+    @Transactional
+    fun deleteById(@PathParam("id")id: String): List<Beer> {
+        beerService.deleteById(id)
+        return readAll()
+    }
 
-//    @POST
-//    fun add(beer: Beer?): List<Beer> {
-//        beerService.add(beer)
-//        return listAll()
-//    }
-//    @GET @Path("{id}")
-//    fun getFromId(@PathParam("id") id: String): Movie {
-//        val movie: Movie? = beerService.get(id)
-//        if (null == movie){
-//            throw NotFoundException("The Movie with id " + id + " was not found")
-//        }
-//        return movie
-//    }
+    @DELETE
+    @Transactional
+    fun deleteAll(){
+        beerService.deleteAll()
+    }
+
+    //for TESTING
+
     @GET @Path("/test")
      fun testMe(): List<Beer> {
            return Faked.genFakerBeers(5)
     }
-    //https://www.technicalkeeda.com/java-mongodb-tutorials/java-mongodb-driver-3-3-0-pagination-example
-//    @GET @Path("/paged/{page}")    fun paged(@PathParam("page") page: kotlin.Int): kotlin.collections.List<Movie> {
-//        return beerService.paged(page)
-//    }
+
 }

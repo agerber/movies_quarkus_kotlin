@@ -45,10 +45,6 @@ class SomeBeerRepository: BeerRepoInterface {
         //do nothing
     }
 
-    override fun _deleteById(id:ObjectId){
-        //do nothing
-    }
-
     override fun _deleteAll(){
         //do nothing
     }

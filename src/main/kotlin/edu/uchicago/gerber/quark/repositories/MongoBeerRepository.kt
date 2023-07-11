@@ -45,7 +45,7 @@ class MongoBeerRepository: PanacheMongoRepository<Beer>, BeerRepoInterface {
     //READ
     override fun _readById(id:String): Beer {
        val beerId = ObjectId(id)
-       return this.findById(beerId) ?: throw Exception("No person with that ID")
+       return this.findById(beerId) ?: throw Exception("No beer with that ID")
     }
 
     //stream all

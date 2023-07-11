@@ -11,11 +11,10 @@ import jakarta.inject.Inject
 import org.bson.types.ObjectId
 
 @ApplicationScoped
-//class MovieService (private val movieRepo: MovieMongodbRepo) {
-    class BeerService  {
+class BeerService  {
 
     @Inject
-    lateinit var beerRepository: SomeBeerRepository
+    lateinit var beerRepository: MongoBeerRepository
 
 
     fun create(beer: Beer){
@@ -36,9 +35,6 @@ import org.bson.types.ObjectId
     fun deleteById(id:String){
         return  beerRepository._deleteById(id)
     }
-    fun deleteById(id: ObjectId){
-        return  beerRepository._deleteById(id)
-    }
     fun deleteAll(){
         beerRepository._deleteAll()
     }
@@ -49,32 +45,6 @@ import org.bson.types.ObjectId
         return beerRepository._findAll()
 
     }
-
-
-//    fun listAll(): List<Beer>{
-//        //just satisfy compiler
-//        return beerRepository._readAll()
-//    }
-//
-//    fun genFakerBeers(num: Int): List<Beer>{
-//      return  Faked.genFakerBeers(num)
-//    }
-//
-//    fun add( movie: Beer?): List<Beer>{
-//        return listAll()
-//    }
-//
-//    fun findAll(): PanacheQuery<Beer>?{
-//
-//      return beerRepository._findAll()
-//
-//
-//    }
-//
-//    fun get(id:String): Beer? {
-//        //just satisfy compiler
-//        return null
-//    }
 
 
 }

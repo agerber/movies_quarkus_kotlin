@@ -12,7 +12,6 @@ interface BeerRepoInterface {
     fun _readAll(): List<Beer>
     fun _update(updatedBeer: Beer)
     fun _deleteById(id:String)
-    fun _deleteById(id: ObjectId)
     fun _deleteAll()
     fun _count() : Long
     fun _findAll(): PanacheQuery<Beer>?
