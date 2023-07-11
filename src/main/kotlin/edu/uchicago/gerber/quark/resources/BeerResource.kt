@@ -23,7 +23,7 @@ class BeerResource {
 
     @GET
     fun listAll(): List<Beer>{
-        return beerService.listAll()
+        return beerService.readAll()
     }
     @GET
     @Path("/{page}")
@@ -33,7 +33,7 @@ class BeerResource {
         if (pagedBeers != null){
             return pagedBeers.page(page, TOTAL_PER_PAGE).list()
         } else {
-            return Faked.genFakerBeers(page)
+            return Faked.genFakerBeers(TOTAL_PER_PAGE)
         }
 
     }
@@ -57,7 +57,7 @@ class BeerResource {
 //    }
     @GET @Path("/test")
      fun testMe(): List<Beer> {
-           return beerService.genFakerBeers(5)
+           return Faked.genFakerBeers(5)
     }
     //https://www.technicalkeeda.com/java-mongodb-tutorials/java-mongodb-driver-3-3-0-pagination-example
 //    @GET @Path("/paged/{page}")    fun paged(@PathParam("page") page: kotlin.Int): kotlin.collections.List<Movie> {
