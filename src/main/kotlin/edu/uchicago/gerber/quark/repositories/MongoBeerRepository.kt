@@ -43,13 +43,14 @@ class MongoBeerRepository: PanacheMongoRepository<Beer>, BeerRepoInterface {
     //READ
     override fun _readById(id:String): Beer {
        val beerId = ObjectId(id)
+        //findById will return null if not found, so use the elvis operator to throw.
+        //These exceptions will be propagated automatically to the quarkus container
        return this.findById(beerId) ?: throw Exception("No beer with that ID")
     }
 
 
     override fun _readAll(): List<Beer> {
         return  this.listAll()
-        //we can also stream using this.streamAll()
     }
 
     //UPDATE
