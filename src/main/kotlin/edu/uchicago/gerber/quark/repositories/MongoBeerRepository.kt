@@ -17,7 +17,7 @@ class MongoBeerRepository: PanacheMongoRepository<Beer>, BeerRepoInterface {
     fun onStart(@Observes ev: StartupEvent?) {
         if (count() == 0L){
             val list = mutableListOf<Beer>()
-            repeat(20){ list.add(Faked.genRawEntity()) }
+            repeat(23){ list.add(Faked.genRawEntity()) }
             persist(list)
         }
 

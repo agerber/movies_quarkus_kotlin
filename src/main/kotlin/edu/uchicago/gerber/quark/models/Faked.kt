@@ -3,10 +3,11 @@ package edu.uchicago.gerber.quark.models
 import com.github.javafaker.Faker
 
 object Faked {
-
+    //static prop
+    val faker = Faker()
     //automatically static public
      fun genRawEntity(): Beer{
-        val faker = Faker()
+
         val fakerBeer = faker.beer()
         val beer = Beer()
         //we allow mongo to generate the id's for us
