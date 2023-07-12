@@ -6,6 +6,7 @@ import edu.uchicago.gerber.quark.repositories.BeerRepoInterface
 import edu.uchicago.gerber.quark.repositories.MongoBeerRepository
 import io.quarkus.mongodb.panache.kotlin.PanacheQuery
 import jakarta.annotation.PostConstruct
+import jakarta.annotation.PreDestroy
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.inject.Inject
 
@@ -50,6 +51,12 @@ class BeerService  {
     fun findAll(): PanacheQuery<Beer>?{
         return interfaceRepository._findAll()
 
+    }
+
+    @PreDestroy
+    fun purgeDatabase(){
+        //WARNING - DO NOT INCLUDE THIS IN PRODUCTION
+        interfaceRepository._deleteAll()
     }
 
 
