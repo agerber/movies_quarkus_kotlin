@@ -20,7 +20,7 @@ class BeerResourceTest {
 
         given()
             .`when`().get("/beers/{id}", Faked.FAKE_ID)
-            .then()
+        .then()
             .statusCode(200)
             .body("id", `is`(Faked.FAKE_ID));
 
