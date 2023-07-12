@@ -16,8 +16,6 @@ import jakarta.ws.rs.core.Response
 @Consumes(MediaType.APPLICATION_JSON)
 class BeerResource {
 
-    //add this import jakarta.transaction.Transactional to any thing that modifies the db
-
     @Inject
     lateinit var beerService:BeerService
 
@@ -41,17 +39,7 @@ class BeerResource {
     @GET
     @Path("{id}")
     fun readById(@PathParam("id") id: String): Beer {
-
        return beerService.readById(id)
-
-      //  return beerService.readById(id)
-//        val beer: Beer
-//        try {
-//            beer = beerService.readById(id)
-//            return  beer
-//        } catch (e:Exception){
-//            throw  WebApplicationException(Response.status(422).entity(e.message).build())
-//        }
 
     }
 
@@ -60,6 +48,7 @@ class BeerResource {
     fun paged(@PathParam("page") page: Int): List<Beer> {
         //this is lazy.
         val pagedBeers: PanacheQuery<Beer>? = beerService.findAll()
+        //the reason we use this if clause is to accommodate the SomeBeerRepository
         if (pagedBeers != null){
             return pagedBeers.page(page, TOTAL_PER_PAGE).list()
         } else {

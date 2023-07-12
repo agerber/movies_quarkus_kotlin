@@ -5,7 +5,7 @@ import com.github.javafaker.Faker
 object Faked {
     //static prop
     val faker = Faker()
-    //automatically static public
+
      fun genRawEntity(): Beer{
 
         val fakerBeer = faker.beer()
