@@ -1,48 +1,54 @@
 package edu.uchicago.gerber.quark.services
 
 import edu.uchicago.gerber.quark.models.Beer
-import edu.uchicago.gerber.quark.models.Faked
+import edu.uchicago.gerber.quark.repositories.BeerRepoInterface
 
 import edu.uchicago.gerber.quark.repositories.MongoBeerRepository
-import edu.uchicago.gerber.quark.repositories.SomeBeerRepository
 import io.quarkus.mongodb.panache.kotlin.PanacheQuery
+import jakarta.annotation.PostConstruct
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.inject.Inject
-import org.bson.types.ObjectId
 
 @ApplicationScoped
 class BeerService  {
 
     @Inject
-    lateinit var beerRepository: MongoBeerRepository
+    lateinit var concreteRepository: MongoBeerRepository
 
+    //contains the instantiated object in an interface reference
+    lateinit var interfaceRepository: BeerRepoInterface
+
+    @PostConstruct
+    fun initialize(){
+        interfaceRepository = concreteRepository
+    }
 
     fun create(beer: Beer){
-        beerRepository._create(beer)
+        interfaceRepository._create(beer)
     }
     fun create(beers: List<Beer>){
-        beerRepository._create(beers)
+        interfaceRepository._create(beers)
     }
     fun readById(id:String): Beer{
-      return  beerRepository._readById(id)
+      return  interfaceRepository._readById(id)
     }
     fun readAll(): List<Beer>{
-        return  beerRepository._readAll()
+        return  interfaceRepository._readAll()
     }
     fun update(updatedBeer: Beer){
-        return  beerRepository._update(updatedBeer)
+        return  interfaceRepository._update(updatedBeer)
     }
     fun deleteById(id:String){
-        return  beerRepository._deleteById(id)
+        return  interfaceRepository._deleteById(id)
     }
     fun deleteAll(){
-        beerRepository._deleteAll()
+        interfaceRepository._deleteAll()
     }
     fun count() : Long{
-       return beerRepository._count()
+       return interfaceRepository._count()
     }
     fun findAll(): PanacheQuery<Beer>?{
-        return beerRepository._findAll()
+        return interfaceRepository._findAll()
 
     }
 
