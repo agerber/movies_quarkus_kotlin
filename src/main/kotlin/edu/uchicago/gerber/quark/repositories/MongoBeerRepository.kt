@@ -30,14 +30,6 @@ class MongoBeerRepository: PanacheMongoRepository<Beer>, BeerRepoInterface {
 
 
 
-
-
-
-    //todo remove unnessary dependencies
-    //fix maven home and surefire.
-    //add tests.
-
-
     //CREATE
 
     override fun _create(beer: Beer){
