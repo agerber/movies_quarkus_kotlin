@@ -19,10 +19,18 @@ class MongoBeerRepository: PanacheMongoRepository<Beer>, BeerRepoInterface {
             val list = mutableListOf<Beer>()
             repeat(23){ list.add(Faked.genRawEntity()) }
             persist(list)
+            //rather than allowing MongoDB to generate the id for us, we add a single beer
+            // with our own id which we will use for testing. (DO THIS FOR TESTING ONLY)
+            persist(Faked.genTestBeer(Faked.FAKE_ID))
+
         }
 
 
     }
+
+
+
+
 
 
     //todo remove unnessary dependencies

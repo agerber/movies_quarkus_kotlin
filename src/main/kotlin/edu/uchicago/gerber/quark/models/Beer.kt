@@ -1,6 +1,5 @@
 package edu.uchicago.gerber.quark.models
 
-import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
 import org.bson.types.ObjectId
 
 
